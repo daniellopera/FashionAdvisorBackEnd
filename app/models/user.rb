@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
 
   has_and_belongs_to_many :products
+  has_many :outfits
 
   # @param [Integer] product_id, this is the ID of the product we are looking for in the wardrobe
   # @return [Boolean] True if the product is in the users wardrobe.
