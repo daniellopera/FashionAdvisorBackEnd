@@ -2,7 +2,17 @@ class OutfitsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-
+    if (params[:product_id]) == nil
+      outfits = Outfits.new
+      outfits.name = params[:name]
+      outfits.description = params[:description]
+      outfits.user_id = current_user.id
+      outfits.save
+      if outfits
+        render json: {status: 0, data: {outfitid: outfits.id}}
+      else
+        render json: {status: 1, data: nil}
+    end
   end
 
   def bring_outfits_from_wardrobe
