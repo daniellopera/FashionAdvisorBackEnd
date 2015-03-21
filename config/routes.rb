@@ -11,8 +11,10 @@ Rails.application.routes.draw do
 
   root 'products#search'
 
-  get 'search/:search_param' => 'products#search'
   get 'search/' => 'products#search'
+
+  get 'brands/' => 'brands#list_brands'
+  get 'brands/search/:search_param' => 'brands#autocomplete_brands'
 
 
   get 'user/products' => 'products#bring_products_from_wardrobe'

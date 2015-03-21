@@ -1,28 +1,71 @@
 module ShopStyleApiHelper
 
+  API_KEY = 'uid9921-26902161-26'
+  API_URI = 'http://api.shopstyle.com/api/v2'
+  PARAM_PID = "pid="
+  PARAM_LIMIT = "&limit=20"
+
   # Search a product by a given ID in the ShopStyle API.
   # @param [Integer] id The id of the product wanted to fetch.
   # @return [Hash] Hash of the product information.
   def search_by_id(id)
-    p = JSON.parse(Net::HTTP.get(URI.parse("http://api.shopstyle.com/api/v2/products/#{id}?pid=uid9921-26902161-26")))
+    product_by_id_param = "/products/#{id}?"
+    p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << product_by_id_param << PARAM_PID << API_KEY)))
   end
 
-  # This method formats the hash that is returned from the ShopStyle API, adds a field
-  # which tells if a product belongs to a users wardrobe.
-  # @param [Hash] products_hash Raw Hash returned by the API
-  # @return [Object] Returns the formatted hash with the proper keys and values.
-  def format_products_hash(products_hash, user)
-    @products = products_hash.map! do |p|
+  # Search all the brands of the shopstyle database
+  def search_brands_shopstyle
+    brands_uri_param = "/brands?"
+    p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << brands_uri_param << PARAM_PID << API_KEY)))
+  end
 
-      image = p['images'].select { |i| i['sizeName'] == 'Large' }.pop
-      p['in_wardrobe'] = false
-      Product.create(p["id"].to_i)
+  # Search all the colors of the shopstyle database
+  def search_colors_shopstyle
+    colors_uri_param = "/colors?"
+    p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << colors_uri_param << PARAM_PID << API_KEY)))
+  end
 
-      if user.has_product_in_wardrobe?(p['id'].to_i)
-        p['in_wardrobe'] = true
-      end
-      p  #This is necesary to return the value
+  # Search the products that match the given parameters.
+  # @param [String] search_text, relevant words that could match in the name or description of the product.
+  # @param [String] color_id, color of the products that want to search
+  # @param [String] brand_id, brand of the products that want to search
+  # @return [Hash] products returned by the shopstyle database.
+  def search_product_by_params(search_text, color_id, brand_id)
+    products_uri_param = "/products?"
+    products_specific_params = ""
+
+    unless search_text.blank?
+      add_filter_to_products_uri(products_specific_params, 1, search_text)
+    end
+
+    unless color_id.blank?
+      add_filter_to_products_uri(products_specific_params, 2, color_id)
+    end
+
+    unless brand_id.blank?
+      add_filter_to_products_uri(products_specific_params, 3, brand_id)
+    end
+    p = ["products" => ""]
+    unless search_text.blank? && brand_id.blank? && brand_id.blank?
+      p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << products_uri_param << PARAM_PID << API_KEY << products_specific_params)))
     end
   end
+
+  # @param [String] uri, the uri that will be formatted.
+  # @param [String] type, type of the filter that will be added.
+  # @param [String] value, value of the parameter.
+  # @return [String] the formatted uri.
+  def add_filter_to_products_uri(uri, type, value)
+    if type == 1
+      uri = uri << '&fts=' << value
+    elsif type == 2
+      uri = uri << '&fl=c' << value
+    elsif type == 3
+      uri = uri << '&fl=b' << value
+    end
+      uri
+  end
+
+
 
 end
