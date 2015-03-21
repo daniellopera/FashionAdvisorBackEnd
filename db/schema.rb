@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20150319180411) do
 
   create_table "outfits", force: :cascade do |t|
@@ -28,6 +29,15 @@ ActiveRecord::Schema.define(version: 20150319180411) do
   end
 
   add_index "outfits_products", ["outfit_id", "product_id"], name: "index_outfits_products_on_outfit_id_and_product_id", using: :btree
+
+ActiveRecord::Schema.define(version: 20150319164308) do
+
+  create_table "brands", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
 
   create_table "products", force: :cascade do |t|
     t.datetime "created_at", null: false
