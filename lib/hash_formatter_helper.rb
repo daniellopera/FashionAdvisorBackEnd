@@ -23,7 +23,7 @@ module HashFormatterHelper
   # @return [Object] Returns the formatted hash with the proper keys and values.
   def format_brands_hash(brands_hash)
 
-    brands = brands_hash.map! do |p|
+    brands = brands_hash.map do |p|
       brand = {
           id: p['id'],
           name: p['name']
@@ -38,5 +38,13 @@ module HashFormatterHelper
   # @return [Object] Returns the formatted hash with the proper keys and values
   def formats_colors_hash(colors_hash)
     colors_hash['colors']
+  end
+
+  def format_products_in_outfit_hash(products)
+
+    final_products = products.map do |p|
+      product = search_by_id(p['id'])
+      product
+    end
   end
 end

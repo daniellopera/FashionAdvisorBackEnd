@@ -3,7 +3,7 @@ require 'shopsense'
 class ProductsController < ApplicationController
   include ShopStyleApiHelper
   include HashFormatterHelper
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
 
   # GET '/search/?search_text="XXX"&color_id=X&brand_id=X'

@@ -5,12 +5,13 @@ module ShopStyleApiHelper
   PARAM_PID = "pid="
   PARAM_LIMIT = "&limit=20"
 
+
   # Search a product by a given ID in the ShopStyle API.
   # @param [Integer] id The id of the product wanted to fetch.
   # @return [Hash] Hash of the product information.
   def search_by_id(id)
-    product_by_id_param = "/products/#{id}?"
-    p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << product_by_id_param << PARAM_PID << API_KEY)))
+    products_param = "/products/"
+    p = JSON.parse(Net::HTTP.get(URI.parse("" << API_URI << products_param << id.to_s << "?" << PARAM_PID  << API_KEY)))
   end
 
   # Search all the brands of the shopstyle database

@@ -16,6 +16,7 @@ class BrandsController < ApplicationController
   # List all the brands stored in the fashion advisor database.
   def list_brands
     brands = Brand.all.select('id', 'name')
+
     render json: {status: 0, data: {brands: brands}}
   end
 
@@ -26,7 +27,7 @@ class BrandsController < ApplicationController
                  .limit(20)
                  .select('id', 'name')
 
-    render json: {status: 0, data: {brands: product}}
+    render json: {status: 0, data: {brands: brands}}
   end
 
 
