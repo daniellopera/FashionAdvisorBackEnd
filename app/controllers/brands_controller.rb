@@ -2,7 +2,7 @@ class BrandsController < ApplicationController
 
   include ShopStyleApiHelper
   include HashFormatterHelper
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
 
   # Updates the fashion advisor database brands with the Shopstyle database new brands.

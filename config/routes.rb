@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'colors/' => 'products#list_colors'
   get 'brands/' => 'brands#list_brands'
   get 'brands/search/:search_param' => 'brands#autocomplete_brands'
-  get 'brands/update' => 'brands#update_brands'
+ # get 'brands/update' => 'brands#update_brands'
 
   get 'user/products' => 'products#bring_products_from_wardrobe'
 
