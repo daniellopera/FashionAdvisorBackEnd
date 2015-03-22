@@ -48,7 +48,7 @@ module ShopStyleApiHelper
     end
     p = ["products" => ""]
     unless search_text.blank? && brand_id.blank? && brand_id.blank?
-      p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << products_uri_param << PARAM_PID << API_KEY << products_specific_params)))
+      p = JSON.parse(Net::HTTP.get(URI.parse("" << API_URI << products_uri_param << PARAM_PID << API_KEY << products_specific_params)))
     end
   end
 
