@@ -17,13 +17,13 @@ module ShopStyleApiHelper
   # Search all the brands of the shopstyle database
   def search_brands_shopstyle
     brands_uri_param = "/brands?"
-    p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << brands_uri_param << PARAM_PID << API_KEY)))
+    p = JSON.parse(Net::HTTP.get(URI.parse("" << API_URI << brands_uri_param << PARAM_PID << API_KEY)))
   end
 
   # Search all the colors of the shopstyle database
   def search_colors_shopstyle
     colors_uri_param = "/colors?"
-    p = JSON.parse(Net::HTTP.get(URI.parse(API_URI << colors_uri_param << PARAM_PID << API_KEY)))
+    p = JSON.parse(Net::HTTP.get(URI.parse("" << API_URI << colors_uri_param << PARAM_PID << API_KEY)))
   end
 
   # Search the products that match the given parameters.
