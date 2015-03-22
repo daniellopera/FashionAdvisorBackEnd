@@ -22,6 +22,14 @@ class ProductsController < ApplicationController
     render json: { status: 0, data: {products: products} }
   end
 
+  # GET '/colors/' to list all the colors.
+  # This is planned to be moved to a new "Search" controller.
+  def list_colors
+    colors_raw = search_colors_shopstyle
+    colors =  formats_colors_hash(colors_raw)
+    render json: { status: 0, data: {colors: colors} }
+  end
+
 
   # POST 'user/products'
   # Adds a specific product to the current users wardrobe

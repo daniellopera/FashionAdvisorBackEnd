@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   root 'products#search'
 
   get 'search/' => 'products#search'
-
+  get 'colors/' => 'products#list_colors'
   get 'brands/' => 'brands#list_brands'
   get 'brands/search/:search_param' => 'brands#autocomplete_brands'
 
