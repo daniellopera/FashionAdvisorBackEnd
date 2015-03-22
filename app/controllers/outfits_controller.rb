@@ -31,7 +31,9 @@ class OutfitsController < ApplicationController
       products = outfit.products.select("id")
       rating = outfit.rating
       name = outfit.name
+      description = outfit.description
       complete_outfit['name'] = name
+      complete_outfit['description'] = description
       complete_outfit['products'] = format_products_in_outfit_hash(products)
       complete_outfit['rating'] = rating
       wardrobe_outfits << complete_outfit
