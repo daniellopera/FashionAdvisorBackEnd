@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :ratings
+
+  resources :comments
+
   # Tells the router to use the controllers located in /controllers/users
   # This routes are specifically for the users registration, authentication and authorization
   # done by the devise gem and the simple toke authentication gems.

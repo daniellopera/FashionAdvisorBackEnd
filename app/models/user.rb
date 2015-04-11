@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   #This makes the User model the one that acts as th
   acts_as_token_authenticatable
 
@@ -8,6 +9,9 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :products
   has_many :outfits
+  has_many :comments
+  has_many :ratings
+  has_and_belongs_to_many :users
 
   # @param [Integer] product_id, this is the ID of the product we are looking for in the wardrobe
   # @return [Boolean] True if the product is in the users wardrobe.
