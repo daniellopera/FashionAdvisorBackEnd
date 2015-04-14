@@ -49,10 +49,8 @@ ActiveRecord::Schema.define(version: 20150414015925) do
   end
 
   create_table "products_users", id: false, force: :cascade do |t|
-    t.integer  "product_id", limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "product_id", limit: 4
+    t.integer "user_id",    limit: 4
   end
 
   add_index "products_users", ["product_id", "user_id"], name: "index_products_users_on_product_id_and_user_id", using: :btree
