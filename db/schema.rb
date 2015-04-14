@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319180411) do
+ActiveRecord::Schema.define(version: 20150414015925) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "outfit_id",  limit: 4
+    t.integer  "user_id",    limit: 4
+    t.string   "comment",    limit: 255
   end
 
   create_table "outfits", force: :cascade do |t|
@@ -48,6 +56,11 @@ ActiveRecord::Schema.define(version: 20150319180411) do
   end
 
   add_index "products_users", ["product_id", "user_id"], name: "index_products_users_on_product_id_and_user_id", using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

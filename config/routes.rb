@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   post 'user/products' => 'products#add_product_to_wardrobe'
   post 'user/outfits' => 'outfits#create'
   get 'user/outfits' => 'outfits#bring_outfits_from_wardrobe'
-
+  
 
 end
