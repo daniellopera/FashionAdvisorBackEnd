@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post 'user/products'=> 'products#add_product_to_wardrobe'
   post 'user/outfits' => 'outfits#create'
   post 'rating/rate'  => 'ratings#rate_an_outfit'
+  post 'comments/comment' => 'comments#comment_an_outfit'
   get 'user/outfits'  => 'outfits#bring_outfits_from_wardrobe'
   
 
