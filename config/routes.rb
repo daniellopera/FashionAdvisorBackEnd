@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :ratings
 
   resources :comments
 
@@ -20,12 +19,11 @@ Rails.application.routes.draw do
   get 'brands/' => 'brands#list_brands'
   get 'brands/search/:search_param' => 'brands#autocomplete_brands'
  # get 'brands/update' => 'brands#update_brands'
-
   get 'user/products' => 'products#bring_products_from_wardrobe'
-
-  post 'user/products' => 'products#add_product_to_wardrobe'
+  post 'user/products'=> 'products#add_product_to_wardrobe'
   post 'user/outfits' => 'outfits#create'
-  get 'user/outfits' => 'outfits#bring_outfits_from_wardrobe'
+  post 'rating/rate'  => 'ratings#rate_an_outfit'
+  get 'user/outfits'  => 'outfits#bring_outfits_from_wardrobe'
   
 
 end
