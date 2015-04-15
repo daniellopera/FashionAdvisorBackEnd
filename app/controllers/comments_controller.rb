@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
+
   def comment_an_outfit
     unless params[:comment] ==  nil
       comment = Comment.new

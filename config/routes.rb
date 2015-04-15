@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
 
-  resources :comments
+
+
+  get 'users/search'
 
   # Tells the router to use the controllers located in /controllers/users
   # This routes are specifically for the users registration, authentication and authorization
