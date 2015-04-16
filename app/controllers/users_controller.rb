@@ -8,4 +8,12 @@ class UsersController < ApplicationController
       render json: {status: 0, data: {user: emails}}
     end
   end
+
+  def follow
+    user = User.find(1)
+    following = user.follower
+    render json: {status: 1, data: following}
+  end
 end
+
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411165133) do
+ActiveRecord::Schema.define(version: 20150416162355) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20150411165133) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "followers_following_joins", id: false, force: :cascade do |t|
+    t.integer "user_id",      limit: 4
+    t.integer "following_id", limit: 4
+  end
+
+  add_index "followers_following_joins", ["user_id", "following_id"], name: "index_followers_following_joins_on_user_id_and_following_id", using: :btree
 
   create_table "outfits", force: :cascade do |t|
     t.string   "name",        limit: 255
