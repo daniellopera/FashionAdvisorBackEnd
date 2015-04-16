@@ -27,12 +27,12 @@ ActiveRecord::Schema.define(version: 20150416162355) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "followers_following_joins", id: false, force: :cascade do |t|
+  create_table "followers_following_join", id: false, force: :cascade do |t|
     t.integer "user_id",      limit: 4
     t.integer "following_id", limit: 4
   end
 
-  add_index "followers_following_joins", ["user_id", "following_id"], name: "index_followers_following_joins_on_user_id_and_following_id", using: :btree
+  add_index "followers_following_join", ["user_id", "following_id"], name: "index_followers_following_join_on_user_id_and_following_id", using: :btree
 
   create_table "outfits", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 20150416162355) do
   end
 
   create_table "products_users", id: false, force: :cascade do |t|
-    t.integer "product_id", limit: 4
-    t.integer "user_id",    limit: 4
+    t.integer  "product_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "products_users", ["product_id", "user_id"], name: "index_products_users_on_product_id_and_user_id", using: :btree
