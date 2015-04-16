@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def view_profile
+
+  end
+
 end
 
 
