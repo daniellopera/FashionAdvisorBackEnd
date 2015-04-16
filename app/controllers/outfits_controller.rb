@@ -40,5 +40,9 @@ class OutfitsController < ApplicationController
     end
     render json: {status: 0, data: {wardrobe_outfits: wardrobe_outfits}}
   end
+
+  def view_profile
+
+  end
 end
 

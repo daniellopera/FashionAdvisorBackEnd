@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     else
       render json: {status: 0, data: following_list}
     end
-
   end
 
   def followers_users
