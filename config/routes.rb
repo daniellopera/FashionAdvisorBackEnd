@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
 
 
-  get 'users/search'
 
   # Tells the router to use the controllers located in /controllers/users
   # This routes are specifically for the users registration, authentication and authorization
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
   post 'rating/rate'  => 'ratings#rate_an_outfit'
   post 'comments/comment' => 'comments#comment_an_outfit'
   get 'user/outfits'  => 'outfits#bring_outfits_from_wardrobe'
+  get 'users/search'  => 'users#search'
   
 
 end
