@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   post 'comments/comment' => 'comments#comment_an_outfit'
   get 'user/outfits'  => 'outfits#bring_outfits_from_wardrobe'
   get 'users/search'  => 'users#search'
-  get 'user/following'  => 'users#follow'
+  get 'user/following'  => 'users#following_users'
+  get 'user/followers'  => 'users#followers_users'
+  post 'users/follow'   => 'users#follow_an_user'
   
 
 end

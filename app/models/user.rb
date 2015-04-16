@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_and_belongs_to_many :following, :class_name => "User", join_table: "followers_following_join", foreign_key:  "user_id",
            association_foreign_key: "following_id"
-  has_and_belongs_to_many :follower, :class_name => "User", join_table: "followers_following_join", foreign_key:  "following_id",
+  has_and_belongs_to_many :followers, :class_name => "User", join_table: "followers_following_join", foreign_key:  "following_id",
                           association_foreign_key: "user_id"
 
 
