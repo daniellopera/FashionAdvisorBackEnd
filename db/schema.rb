@@ -27,17 +27,17 @@ ActiveRecord::Schema.define(version: 20150416162355) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "followers_following_join", id: false, force: :cascade do |t|
+  create_table "followers_following", id: false, force: :cascade do |t|
     t.integer "user_id",      limit: 4
     t.integer "following_id", limit: 4
   end
 
-  add_index "followers_following_join", ["user_id", "following_id"], name: "index_followers_following_join_on_user_id_and_following_id", using: :btree
+  add_index "followers_following", ["user_id", "following_id"], name: "index_followers_following_on_user_id_and_following_id", using: :btree
 
   create_table "outfits", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
-    t.float    "rating",      limit: 24
+    t.integer  "rating",      limit: 4
     t.integer  "user_id",     limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false

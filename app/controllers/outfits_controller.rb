@@ -3,8 +3,8 @@ class OutfitsController < ApplicationController
   include HashFormatterHelper
   before_action :authenticate_user!
 
-  def create
 
+  def create
     unless params[:fullname].blank? && params[:products] == nil
       outfit = Outfit.new
       outfit.name = params[:fullname]
@@ -22,24 +22,26 @@ class OutfitsController < ApplicationController
     end
   end
 
-
-
+  #GET /user/outfits
   def bring_outfits_from_wardrobe
     wardrobe_outfits = []
-    current_user.outfits.order(:created_at => 'ASC').each do |outfit|
-      complete_outfit = Hash.new
-      products = outfit.products.select("id")
-      rating = outfit.rating
-      name = outfit.name
-      description = outfit.description
-      complete_outfit['name'] = name
-      complete_outfit['description'] = description
-      complete_outfit['products'] = format_products_in_outfit_hash(products)
-      complete_outfit['rating'] = rating
-      wardrobe_outfits << complete_outfit
-    end
+    format_outfits_hash(wardrobe_outfits)
     render json: {status: 0, data: {wardrobe_outfits: wardrobe_outfits}}
   end
+
+
+  #GET /user/outfits/:id/
+  def get_outfit_comments
+    if params[:id]
+      outfit = Outfit.find_by_id(params[:id])
+      comments = outfit.comments.select("comment", "user_id", "id")
+      render json: {status: 0, data: {outfit_comments: comments}}
+    else
+      render json:  {status: 1, data: nil}
+    end
+
+  end
+
 
 
 end

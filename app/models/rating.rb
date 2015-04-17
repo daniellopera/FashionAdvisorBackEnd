@@ -20,4 +20,5 @@ class Rating < ActiveRecord::Base
     outfit.save
     average_rate
   end
+
 end

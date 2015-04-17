@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
-
+  #POST /comments/comment
+  #{"outfit_id": "X", "comment":"XXXX"}
   def comment_an_outfit
     unless params[:comment] ==  nil
       comment = Comment.new
@@ -15,5 +16,6 @@ class CommentsController < ApplicationController
       end
     end
   end
+
 
 end
