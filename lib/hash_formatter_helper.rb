@@ -47,4 +47,22 @@ module HashFormatterHelper
       product
     end
   end
+
+
+  def format_outfits_hash(wardrobe_outfits)
+    current_user.outfits.order(:created_at => 'ASC').each do |outfit|
+      complete_outfit = Hash.new
+      products = outfit.products.select("id")
+      rating = outfit.rating
+      name = outfit.name
+      description = outfit.description
+
+      complete_outfit['name'] = name
+      complete_outfit['description'] = description
+      complete_outfit['products'] = products
+      complete_outfit['rating'] = rating
+
+      wardrobe_outfits << complete_outfit
+    end
+  end
 end
