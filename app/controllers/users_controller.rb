@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def search
     search_results = current_user.search_users(params[:user_name])
-    if search_results.blank?
+    if search_results == nil
       render json: {status: 1, data: nil}
     else
       render json: {status: 0, data: {users: search_results}}

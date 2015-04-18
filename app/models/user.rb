@@ -25,12 +25,12 @@ class User < ActiveRecord::Base
 
   # Get all the users that the current user is following
   def get_following
-    following.select('id', 'email')
+    following.select('id', 'email', 'username')
   end
 
   # Get all the users that follow the current user
   def get_followers
-    followers.select('id', 'email')
+    followers.select('id', 'email', 'username')
   end
 
   # Adds a user to the following collection
@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
       {
         id: user['id'],
         username: user['username'],
+        email: user['email'],
         following: following
       }
     end
