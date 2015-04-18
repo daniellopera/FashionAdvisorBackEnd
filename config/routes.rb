@@ -17,8 +17,7 @@ Rails.application.routes.draw do
   get 'brands/' => 'brands#list_brands'
   get 'brands/search/:search_param' => 'brands#autocomplete_brands'
  #get 'brands/update' => 'brands#update_brands'
-  get 'user/products' => 'products#bring_products_from_wardrobe'
-  post 'user/products'=> 'products#add_product_to_wardrobe'
+  post 'user/products'=> 'users#add_product_to_wardrobe'
   post 'user/outfits' => 'outfits#create'
   post 'rating/rate'  => 'ratings#rate_an_outfit'
   post 'comments/comment' => 'comments#comment_an_outfit'
@@ -27,8 +26,8 @@ Rails.application.routes.draw do
   get 'users/search'  => 'users#search'
   get 'user/following'  => 'users#following_users'
   get 'user/followers'  => 'users#followers_users'
-  post 'users/follow'   => 'users#follow_an_user'
-
+  post 'users/follow'   => 'users#follow_a_user'
+  get 'user/products' => 'users#get_products_from_wardrobe'
   
 
 end

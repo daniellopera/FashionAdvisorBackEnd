@@ -14,18 +14,13 @@ class BrandsController < ApplicationController
 
   # List all the brands stored in the fashion advisor database.
   def list_brands
-    brands = Brand.all.select('id', 'name')
-
+    brands = Brand.get_all_brands
     render json: {status: 0, data: {brands: brands}}
   end
 
   # List the most relevant brands according to the input given.
   def autocomplete_brands()
-    name = params['search_param']
-    brands = Brand.where("name LIKE ?", "%#{name}%")
-                 .limit(20)
-                 .select('id', 'name')
-
+    brands = Brand.search_brands(params['search_param'])
     render json: {status: 0, data: {brands: brands}}
   end
 
