@@ -1,9 +1,9 @@
 class CreateRatings < ActiveRecord::Migration
   def up
     create_table :ratings do |t|
-      t.integer :rating
       t.integer :user_id
       t.integer :outfit_id
+      t.boolean :rating
       t.timestamps null: false
     end
 

@@ -9,7 +9,7 @@ class Rating < ActiveRecord::Base
             presence: true
 
 
-  def calculate_rating_average(outfit_id, new_rating)
+  def calculate_likes(outfit_id, new_rating)
     outfit  = Outfit.find(outfit_id)
     total_voters = outfit.ratings.all.count
     if outfit.rating == nil
