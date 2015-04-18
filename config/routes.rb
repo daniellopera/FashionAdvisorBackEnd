@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   post 'outfits/search' => 'outfits#get_outfit_by_name'
   post 'users/follow'   => 'users#follow_a_user'
   get 'user/products' => 'users#get_products_from_wardrobe'
+  post 'oufits/search_id' => 'outfits#get_oufit_by_id'
 
 end
