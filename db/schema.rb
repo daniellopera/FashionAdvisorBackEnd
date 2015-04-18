@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416162355) do
+ActiveRecord::Schema.define(version: 20150418154553) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20150416162355) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "authentication_token",   limit: 255
+    t.string   "username",               limit: 255
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
