@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def following_users
     following_list = current_user.get_following
+    puts "pene #{following_list}"
     if following_list == nil
       render json: {status: 1, data: nil}
     else
