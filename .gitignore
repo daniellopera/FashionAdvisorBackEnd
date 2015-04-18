@@ -18,3 +18,5 @@
 
 ## Directory-based project format:
 .idea/
+
+/config/database.yml
