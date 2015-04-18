@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include ShopStyleApiHelper
   include HashFormatterHelper
-  
+
   def search
     search_results = current_user.search_users(params[:user_name])
     if search_results.blank?
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def following_users
     following_list = current_user.get_following
-    if following_list.blank?
+    if following_list == nil
       render json: {status: 1, data: nil}
     else
       render json: {status: 0, data: following_list}
