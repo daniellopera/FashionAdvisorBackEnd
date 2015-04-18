@@ -8,6 +8,9 @@ class Comment < ActiveRecord::Base
 	validates :comment,
             presence: true
 
+  validates :user_id,
+            presence: true
+
 
 
 end
