@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   get 'user/following'  => 'users#following_users'
   get 'user/followers'  => 'users#followers_users'
   post 'users/follow'   => 'users#follow_an_user'
+  post 'users/profile'  => 'users#view_profile'
+  post 'outfits/search' => 'outfits#get_outfit_by_name'
 
-  
+
 
 end
