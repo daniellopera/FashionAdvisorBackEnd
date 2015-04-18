@@ -31,32 +31,8 @@ class ProductsController < ApplicationController
   end
 
 
-  # POST 'user/products'
-  # Adds a specific product to the current users wardrobe
-  def add_product_to_wardrobe
-    if current_user.products.find_by_id(params[:product_id]) == nil
 
-      current_user.products << Product.find(params[:product_id])
-      product = search_by_id(params[:product_id])
 
-      render json: {status: 0, data: {product: product}}
-    else
-
-      render json: {status: 1, data: nil}
-    end
-
-  end
-
-  # GET 'user/products'
-  # Brings the current users wardrobe products and returns the array of products in a JSON format
-  def bring_products_from_wardrobe
-    wardrobe_products = []
-    current_user.products.order(:created_at => 'ASC').each do |product|
-        wardrobe_products << search_by_id(product.id)
-    end
-
-    render json: {status: 0, data:{wardrobe_products: wardrobe_products}}
-  end
 
 
 
