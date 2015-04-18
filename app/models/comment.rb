@@ -12,5 +12,4 @@ class Comment < ActiveRecord::Base
             presence: true
 
 
-
 end

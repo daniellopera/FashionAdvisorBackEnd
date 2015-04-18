@@ -2,42 +2,45 @@ require 'rails_helper'
 
 RSpec.describe Comment, :type => :model do
 
-  it "saves a comment in the database" do
-    comment = Comment.create!(outfit_id: 1, comment: "Lindeman", user_id: 10)
-
-    expect(Comment.all.count).to eq(1)
-
+  it "is valid with a user_id, comment and outfit_id" do
+    comment = Comment.new(user_id: 10,
+                          comment: "This is a comment!",
+                          outfit_id: 15
+    )
+    expect(comment).to be_valid
   end
 
-  it "saves a comment with the specific outfits id" do
-    comment = Comment.create!(outfit_id: 1, comment: "Lindeman", user_id: 10)
+  it "is invalid without an outfit_id" do
+    comment = Comment.new(user_id: 10,
+                          comment: "This is a comment!",
 
-    expect(comment.outfit_id).to eq(1)
+    )
+    comment.valid?
+    expect(comment.errors[:outfit_id]).to include("can't be blank")
   end
 
-  it "saves a comment with the specific user id" do
-    comment = Comment.create!(outfit_id: 1, comment: "Lindeman", user_id: 10)
-
-    expect(comment.user_id).to eq(10)
+  it "is invalid without a comment" do
+    comment = Comment.new(user_id: 10,
+                          outfit_id: 15
+    )
+    comment.valid?
+    expect(comment.errors[:comment]).to include("can't be blank")
   end
 
-  it "saves a comment with the specific content" do
-    comment = Comment.create!(outfit_id: 1, comment: "Lindeman", user_id: 10)
-
-    expect(comment.comment).to eq("Lindeman")
+  it "is invalid without a user_id" do
+    comment = Comment.new(comment: "This is a comment!",
+                          outfit_id: 15
+    )
+    comment.valid?
+    expect(comment.errors[:user_id]).to include("can't be blank")
   end
 
-  it "is invalid without outfit_id" do
-
-    expect {Comment.create!(comment:"Something")}.to  raise_error
-
+  it "should belong to an outfit" do
+    should belong_to(:outfit)
   end
 
-  it "is invalid without user_id" do
-
-    expect {Comment.create!(outfit_id: 1, comment:"Something")}.to  raise_error
-
+  it "should belong to a user" do
+    should belong_to(:user)
   end
-
 
 end
