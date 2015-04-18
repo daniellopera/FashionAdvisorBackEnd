@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
   # @param [String] search_text, the search input
   def search_users(search_text)
-    users = User.where("username LIKE ?", "%#{search_text}%").select('id', 'username')
+    users = User.where("username LIKE ?", "%#{search_text}%").select('id', 'username', 'email')
     users.map do |user|
       if following.include?(user)
         following = true
