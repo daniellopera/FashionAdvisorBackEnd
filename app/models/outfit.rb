@@ -11,4 +11,11 @@ class Outfit < ActiveRecord::Base
       products << product
     end
   end
+
+  def search_outfits_by_name(outfit_name)
+
+    outfits = Outfit.where("name LIKE ?", "%#{outfit_name}%")
+
+  end
+  
 end

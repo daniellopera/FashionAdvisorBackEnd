@@ -42,7 +42,18 @@ class OutfitsController < ApplicationController
 
   end
 
+  def get_outfit_by_name
+
+    if params[:name]
+      outfits = Outfit.new
+      outfits =  outfits.search_outfits_by_name(params[:name])
+      render json: {status: 0, data: outfits}, except: [:created_at,:updated_at]
+    else
+      render json: {status: 1, data: nil}
+    end
+
+  end
+
 
 
 end
-
