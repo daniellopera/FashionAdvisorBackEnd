@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
   def search
-    emails = User.where("email LIKE ?", "%#{params[:email]}%").select('id', 'email')
+    usernames = User.where("username LIKE ?", "%#{params[:user_name]}%").select('id', 'username')
     if emails.blank?
       render json: {status: 1, data: nil}
     else
-      render json: {status: 0, data: {user: emails}}
+      render json: {status: 0, data: {users: usernames}}
     end
   end
 
@@ -41,8 +41,17 @@ class UsersController < ApplicationController
 
   def view_profile
 
+    user = User.find_by_id(params[:id])
+    if user
+      if user.outfits.any?
+        render json: {status: 0, data: user.outfits}
+      else
+        render json: {status: 0, data:nil}
+      end
+    else
+      render json: {status: 1, data:nil}
+    end
   end
 
+
 end
-
-
