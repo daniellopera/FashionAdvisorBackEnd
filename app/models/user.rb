@@ -43,7 +43,6 @@ class User < ActiveRecord::Base
         following << user
         result = true
       end
-
     result
   end
 
