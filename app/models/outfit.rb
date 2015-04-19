@@ -17,5 +17,5 @@ class Outfit < ActiveRecord::Base
     outfits = Outfit.where("name LIKE ?", "%#{outfit_name}%")
 
   end
-  
+
 end
