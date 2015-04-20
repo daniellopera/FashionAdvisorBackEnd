@@ -8,4 +8,12 @@ class Brand < ActiveRecord::Base
       super(brand)
     end
   end
+
+  def self.get_all_brands
+    Brand.all.select('id', 'name')
+  end
+
+  def self.search_brands(name)
+    Brand.where("name LIKE ?", "%#{name}%").limit(20).select('id', 'name')
+  end
 end

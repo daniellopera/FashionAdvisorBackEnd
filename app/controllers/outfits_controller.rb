@@ -42,7 +42,49 @@ class OutfitsController < ApplicationController
 
   end
 
+  def get_outfit_by_name
+
+    if params[:name]
+      outfits = Outfit.new
+      outfits = outfits.search_outfits_by_name(params[:name])
+      render json: {status: 0, data: outfits}, except: [:created_at,:updated_at]
+    else
+      render json: {status: 1, data: nil}
+    end
+
+  end
+
+  def get_oufit_by_id
+    if params[:id]
+        outfit  = Outfit.find_by_id(params[:id])
+        if outfit
+          render json: {status:0, data: outfit}, except: [:created_at,:updated_at]
+        else
+          render json: {status:1, data: nil}
+        end
+    else
+      render json: {status:1, data: nil}
+    end
+
+  end
+
+
+  # POST /outfits/recommend
+  # { "products" : [id1, id2, id3, ... , idn]}
+  def recommend_outfits_by_products
+    if params[:products]
+      outfits  = Outfit.recommend_outfits(params[:products])
+      if outfits != nil
+        render json: {status:0, data: outfits}, except: [:created_at,:updated_at]
+      else
+        render json: {status:1, data: outfits}
+      end
+    else
+      render json: {status:1, data: nil}
+    end
+
+  end
+
 
 
 end
-
