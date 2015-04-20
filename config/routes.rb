@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'user/following'  => 'users#following_users'
   get 'user/followers'  => 'users#followers_users'
   post 'users/follow'   => 'users#follow_an_user'
+  get 'user/ratings'    => 'ratings#get_ratings_from_a_user'
 
   
 

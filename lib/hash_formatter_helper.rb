@@ -65,4 +65,19 @@ module HashFormatterHelper
       wardrobe_outfits << complete_outfit
     end
   end
+
+  def format_ratings_hash(ratings, user_id)
+    user = User.find(user_id)
+    ratings_from_user = user.ratings.select('outfit_id', 'rating')
+    ratings_from_user.each do |rate|
+      rates = Hash.new
+      rates['outfit_id'] = rate.outfit_id
+      if rate.rating
+        rates['rating'] = 1
+      else
+        rates['rating'] = 0
+      end
+      ratings << rates
+    end
+  end
 end
