@@ -21,11 +21,11 @@ class RatingsController < ApplicationController
       if rating.save
         #it saved, which means it's a new like from that user to that outfit
         answer = rating.new_likes(params[:outfit_id], params[:rate])
-        render json: {status: answer, data: nil}
+        render json: {status: answer['status'], data: {likes: answer['likes'], dislikes: answer['dislikes'] }}
       else
         #it didn't save, which means there was already a like/dislike from that user to that outfit
         answer = rating.update_likes(params[:outfit_id], params[:rate], current_user.id)
-        render json: {status: answer, data: nil}
+        render json: {status: answer['status'], data: {likes: answer['likes'], dislikes: answer['dislikes'] }}
       end
     end
   end

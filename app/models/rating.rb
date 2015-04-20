@@ -9,21 +9,26 @@ class Rating < ActiveRecord::Base
 
   def new_likes(outfit_id, new_rating)
     outfit  = Outfit.find(outfit_id)
+    answer = Hash.new
     if new_rating.to_i == 1
       outfit.likes += 1
     else
       outfit.dislikes += 1
     end
+    answer['likes'] = outfit.likes
+    answer['dislikes'] = outfit.dislikes
     if outfit.save
-      0
+      answer['status'] = 0
     else
-      1
+      answer['status'] = 1
     end
+    answer
   end
 
 
 
   def update_likes(outfit_id, new_rating, user_id)
+    answer = Hash.new
     #initialize outfit and rating objects
     outfit  = Outfit.find(outfit_id)
     rating = Rating.find_by(outfit_id: outfit_id, user_id: user_id)
@@ -40,11 +45,14 @@ class Rating < ActiveRecord::Base
       outfit.likes += -1
       outfit.dislikes += 1
     end
+    answer['likes'] = outfit.likes
+    answer['dislikes'] = outfit.dislikes
     if outfit.save
-      0
+      answer['status'] = 0
     else
-      1
+      answer['status'] = 1
     end
+    answer
   end
 
 end
