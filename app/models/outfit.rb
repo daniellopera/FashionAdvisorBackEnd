@@ -4,6 +4,8 @@ class Outfit < ActiveRecord::Base
   has_many :ratings
   has_many :comments
 
+  attr_accessor :num_comments
+
   def add_products_to_outfit(products_array)
     products_array.map do |p|
       product = Product.find(p.to_i)
@@ -64,5 +66,12 @@ class Outfit < ActiveRecord::Base
     ordered_outfits ##= Outfit.where(id: ordered_outfits)
   end
 
+  def num_comments
+    comments.size
+  end
+
+  def attributes
+    super.merge('num_comments' => self.num_comments)
+  end
 
 end

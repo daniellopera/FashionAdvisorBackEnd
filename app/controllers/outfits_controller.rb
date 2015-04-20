@@ -58,6 +58,7 @@ class OutfitsController < ApplicationController
   def get_oufit_by_id
     if params[:id]
         outfit  = Outfit.find_by_id(params[:id])
+
         if outfit
           render json: {status:0, data: outfit}, except: [:created_at,:updated_at]
         else

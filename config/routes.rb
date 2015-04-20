@@ -36,7 +36,8 @@ Rails.application.routes.draw do
   post 'users/follow'   => 'users#follow_a_user'
   post 'user/products'=> 'users#add_product_to_wardrobe'
   post 'user/outfits' => 'outfits#create'
-  post 'outfits/search_id' => 'outfits#get_oufit_by_id'
+
+  get 'outfits/:id' => 'outfits#get_oufit_by_id'
   post 'outfits/search' => 'outfits#get_outfit_by_name'
   post 'outfits/recommend' => 'outfits#recommend_outfits_by_products'
 

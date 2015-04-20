@@ -57,12 +57,14 @@ module HashFormatterHelper
       dislikes = outfit.dislikes
       name = outfit.name
       description = outfit.description
+      num_comments = outfit.num_comments
 
       complete_outfit['name'] = name
       complete_outfit['description'] = description
       complete_outfit['products'] = products
       complete_outfit['likes'] = likes
       complete_outfit['dislikes'] = dislikes
+      complete_outfit['num_comments'] = num_comments
 
       wardrobe_outfits << complete_outfit
     end
@@ -82,4 +84,5 @@ module HashFormatterHelper
       ratings << rates
     end
   end
+
 end
