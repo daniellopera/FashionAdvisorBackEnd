@@ -58,7 +58,7 @@ module HashFormatterHelper
       name = outfit.name
       description = outfit.description
       num_comments = outfit.num_comments
-      id = outfit.id 
+      id = outfit.id
       complete_outfit['id'] = id
       complete_outfit['name'] = name
       complete_outfit['description'] = description
