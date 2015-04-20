@@ -61,7 +61,6 @@ module HashFormatterHelper
       complete_outfit['name'] = name
       complete_outfit['description'] = description
       complete_outfit['products'] = products
-      complete_outfit['rating'] = rating
       complete_outfit['likes'] = likes
       complete_outfit['dislikes'] = dislikes
 
