@@ -53,7 +53,8 @@ module HashFormatterHelper
     current_user.outfits.order(:created_at => 'ASC').each do |outfit|
       complete_outfit = Hash.new
       products = outfit.products.select("id")
-      rating = outfit.rating
+      likes = outfit.likes
+      dislikes = outfit.dislikes
       name = outfit.name
       description = outfit.description
 
@@ -61,6 +62,8 @@ module HashFormatterHelper
       complete_outfit['description'] = description
       complete_outfit['products'] = products
       complete_outfit['rating'] = rating
+      complete_outfit['likes'] = likes
+      complete_outfit['dislikes'] = dislikes
 
       wardrobe_outfits << complete_outfit
     end

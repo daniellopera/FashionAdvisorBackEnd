@@ -8,6 +8,8 @@ class OutfitsController < ApplicationController
     unless params[:fullname].blank? && params[:products] == nil
       outfit = Outfit.new
       outfit.name = params[:fullname]
+      outfit.likes = 0
+      outfit.dislikes = 0
       outfit.description = params[:about]
       outfit.user_id = current_user.id
       if outfit.save
@@ -43,7 +45,6 @@ class OutfitsController < ApplicationController
   end
 
   def get_outfit_by_name
-
     if params[:name]
       outfits = Outfit.new
       outfits = outfits.search_outfits_by_name(params[:name])

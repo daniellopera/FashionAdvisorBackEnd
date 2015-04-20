@@ -55,7 +55,6 @@ class Outfit < ActiveRecord::Base
   # Orders the outfits array using its relevance as a criteria.
   def self.order_outfits_by_relevance(relevance)
     relevance = relevance.sort_by {|k, v| v}.reverse
-
     ordered_outfits = []
     i = 0
     relevance.each do |r|
