@@ -62,6 +62,7 @@ module HashFormatterHelper
       complete_outfit['num_comments'] = outfit.num_comments
       outfits << complete_outfit
     end
+    outfits
   end
 
   def format_ratings_hash(ratings, user_id)

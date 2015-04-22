@@ -27,8 +27,9 @@ class OutfitsController < ApplicationController
   #GET /user/outfits
   def bring_outfits_from_wardrobe
     wardrobe_outfits = current_user.outfits.order(:created_at => 'ASC')
-    format_outfits_hash(wardrobe_outfits)
-    render json: {status: 0, data: {wardrobe_outfits: wardrobe_outfits, outfit_products: outfit.products}}
+    outfits = format_outfits_hash(wardrobe_outfits)
+    puts outfits
+    render json: {status: 0, data: {wardrobe_outfits: outfits}}
   end
 
 
