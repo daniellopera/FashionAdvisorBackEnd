@@ -38,7 +38,7 @@ class OutfitsController < ApplicationController
       outfit = Outfit.find_by_id(params[:id])
 
 
-      comments = outfit.comments.select("comment", "user_id", "id", "created_at").order(:created_at => 'ASC')
+      comments = outfit.comments.select("comment", "user_id", "id", "created_at").order(:created_at => 'DESC')
       comments_array = format_comments_hash(comments)
       #comments.user_id = User.find_by_id(comments.user_id).username
 
