@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418163856) do
+ActiveRecord::Schema.define(version: 20150422162848) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -51,26 +51,38 @@ ActiveRecord::Schema.define(version: 20150418163856) do
 
   add_index "outfits_products", ["outfit_id", "product_id"], name: "index_outfits_products_on_outfit_id_and_product_id", using: :btree
 
+  create_table "outfits_tags", force: :cascade do |t|
+    t.integer "tag_id",    limit: 4
+    t.integer "outfit_id", limit: 4
+  end
+
+  add_index "outfits_tags", ["tag_id", "outfit_id"], name: "index_outfits_tags_on_tag_id_and_outfit_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "products_users", id: false, force: :cascade do |t|
-    t.integer  "product_id", limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "product_id", limit: 4
+    t.integer "user_id",    limit: 4
   end
 
   add_index "products_users", ["product_id", "user_id"], name: "index_products_users_on_product_id_and_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
-    t.integer  "rating",     limit: 4
     t.integer  "user_id",    limit: 4
     t.integer  "outfit_id",  limit: 4
+    t.boolean  "rating",     limit: 1
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "tag",         limit: 255
+    t.integer  "tag_counter", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|
