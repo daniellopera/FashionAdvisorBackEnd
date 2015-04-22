@@ -26,7 +26,7 @@ class OutfitsController < ApplicationController
 
   #GET /user/outfits
   def bring_outfits_from_wardrobe
-    wardrobe_outfits = []
+    wardrobe_outfits = current_user.outfits.order(:created_at => 'ASC')
     format_outfits_hash(wardrobe_outfits)
     render json: {status: 0, data: {wardrobe_outfits: wardrobe_outfits}}
   end
@@ -67,7 +67,7 @@ class OutfitsController < ApplicationController
         outfit  = Outfit.find_by_id(params[:id])
 
         if outfit
-          render json: {status:0, data: outfit}, except: [:created_at,:updated_at]
+          render json: {status:0, data: {outfit: outfit, outfit_products: outfit.products}}, except: [:created_at,:updated_at]
         else
           render json: {status:1, data: nil}
         end

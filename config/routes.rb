@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   get 'brands/' => 'brands#list_brands'
   get 'brands/search/:search_param' => 'brands#autocomplete_brands'
- #get 'brands/update' => 'brands#update_brands'
+  #get 'brands/update' => 'brands#update_brands'
 
 
   post 'rating/rate'  => 'ratings#rate_an_outfit'

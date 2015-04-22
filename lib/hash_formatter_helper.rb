@@ -50,24 +50,17 @@ module HashFormatterHelper
 
 
   def format_outfits_hash(wardrobe_outfits)
-    current_user.outfits.order(:created_at => 'ASC').each do |outfit|
+    outfits = []
+    wardrobe_outfits.each do |outfit|
       complete_outfit = Hash.new
-      products = outfit.products.select("id")
-      likes = outfit.likes
-      dislikes = outfit.dislikes
-      name = outfit.name
-      description = outfit.description
-      num_comments = outfit.num_comments
-      id = outfit.id
-      complete_outfit['id'] = id
-      complete_outfit['name'] = name
-      complete_outfit['description'] = description
-      complete_outfit['products'] = products
-      complete_outfit['likes'] = likes
-      complete_outfit['dislikes'] = dislikes
-      complete_outfit['num_comments'] = num_comments
-
-      wardrobe_outfits << complete_outfit
+      complete_outfit['id'] = outfit.id
+      complete_outfit['name'] = outfit.name
+      complete_outfit['description'] = outfit.description
+      complete_outfit['products'] = outfit.products.select("id")
+      complete_outfit['likes'] = outfit.likes
+      complete_outfit['dislikes'] = outfit.dislikes
+      complete_outfit['num_comments'] = outfit.num_comments
+      outfits << complete_outfit
     end
   end
 
