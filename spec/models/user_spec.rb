@@ -27,7 +27,6 @@ RSpec.describe User, :type => :model do
   end
 
   it "should return true if the product is in the users wardrobe" do
-
     product = Product.new
     product.id = 100
 
@@ -47,7 +46,6 @@ RSpec.describe User, :type => :model do
   end
 
   it "should return false if the product is not in the users wardrobe" do
-
     user = User.new
     user.id = 10
     user.username = "nicolas"

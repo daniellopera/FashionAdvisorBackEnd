@@ -32,7 +32,7 @@ class OutfitsController < ApplicationController
   end
 
 
-  #GET /user/outfits/:id/
+  #GET /user/outfits/:id/comments
   def get_outfit_comments
     if params[:id]
       outfit = Outfit.find_by_id(params[:id])
