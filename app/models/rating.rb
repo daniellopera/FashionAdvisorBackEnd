@@ -38,9 +38,7 @@ class Rating < ActiveRecord::Base
     #save the new rating
     rating.rating = new_rating
     rating.save
-    puts "new_rating #{new_rating} old_rating #{old_rating}"
     if new_rating == 1 && old_rating == 0
-
       outfit.dislikes += -1
       outfit.likes += 1
     elsif new_rating == 0 && old_rating == 1
