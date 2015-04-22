@@ -90,9 +90,9 @@ module HashFormatterHelper
     comments_array = {}
     comments.each do
     |comment|
-      comments_array["comment"] = comment.comment
-      comments_array["username"] = comment.user.username
-      comments_array["date"] = comment.created_at
+      comments_array["outfit"]["comment"] = comment.comment
+      comments_array["outfit"]["username"] = comment.user.username
+      comments_array["outfit"]["date"] = comment.created_at
     end
     comments_array
   end
