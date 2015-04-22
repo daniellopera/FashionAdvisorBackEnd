@@ -36,13 +36,20 @@ class OutfitsController < ApplicationController
   def get_outfit_comments
     if params[:id]
       outfit = Outfit.find_by_id(params[:id])
-      comments = outfit.comments.select("comment", "user_id", "id")
-      render json: {status: 0, data: {outfit_comments: comments}}
+
+
+      comments = outfit.comments.select("comment", "user_id", "id", "created_at")
+      comments_array = format_comments_hash(comments)
+      #comments.user_id = User.find_by_id(comments.user_id).username
+
+      render json: {status: 0, data: {outfit_comments: comments_array}}
     else
       render json:  {status: 1, data: nil}
     end
 
   end
+
+
 
   def get_outfit_by_name
     if params[:name]

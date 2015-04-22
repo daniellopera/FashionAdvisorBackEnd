@@ -86,4 +86,15 @@ module HashFormatterHelper
     end
   end
 
+  def format_comments_hash(comments)
+    comments_array = {}
+    comments.each do
+    |comment|
+      comments_array["comment"] = comment.comment
+      comments_array["username"] = comment.user.username
+      comments_array["date"] = comment.created_at
+    end
+    comments_array
+  end
+
 end
