@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   get 'user/outfits'  => 'outfits#bring_outfits_from_wardrobe'
   get 'user/outfits/:id/comments' => 'outfits#get_outfit_comments'
-  get 'users/search'  => 'users#search'
+  get 'users/search/:username'  => 'users#search'
   get 'user/following'  => 'users#following_users'
   get 'user/followers'  => 'users#followers_users'
   get 'user/ratings'    => 'ratings#get_ratings_from_a_user'

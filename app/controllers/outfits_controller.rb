@@ -51,7 +51,6 @@ class OutfitsController < ApplicationController
   end
 
 
-
   def get_outfit_by_name
     if params[:name]
       outfits = Outfit.new
@@ -77,7 +76,6 @@ class OutfitsController < ApplicationController
     end
 
   end
-
 
   # POST /outfits/recommend
   # { "products" : [id1, id2, id3, ... , idn]}

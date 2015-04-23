@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include HashFormatterHelper
 
   def search
-    search_results = current_user.search_users(params[:user_name])
+    search_results = current_user.search_users(params[:username], current_user)
     if search_results == nil
       render json: {status: 1, data: nil}
     else
