@@ -9,6 +9,7 @@ class BrandsController < ApplicationController
   def update_brands
     brands_raw = search_brands_shopstyle
     brands = format_brands_hash(brands_raw["brands"])
+
     render json: {status: 0, data: {brands: brands}}
   end
 

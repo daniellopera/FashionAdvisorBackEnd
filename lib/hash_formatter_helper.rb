@@ -50,25 +50,19 @@ module HashFormatterHelper
 
 
   def format_outfits_hash(wardrobe_outfits)
-    current_user.outfits.order(:created_at => 'ASC').each do |outfit|
+    outfits = []
+    wardrobe_outfits.each do |outfit|
       complete_outfit = Hash.new
-      products = outfit.products.select("id")
-      likes = outfit.likes
-      dislikes = outfit.dislikes
-      name = outfit.name
-      description = outfit.description
-      num_comments = outfit.num_comments
-      id = outfit.id
-      complete_outfit['id'] = id
-      complete_outfit['name'] = name
-      complete_outfit['description'] = description
-      complete_outfit['products'] = products
-      complete_outfit['likes'] = likes
-      complete_outfit['dislikes'] = dislikes
-      complete_outfit['num_comments'] = num_comments
-
-      wardrobe_outfits << complete_outfit
+      complete_outfit['id'] = outfit.id
+      complete_outfit['name'] = outfit.name
+      complete_outfit['description'] = outfit.description
+      complete_outfit['products'] = outfit.products.select("id")
+      complete_outfit['likes'] = outfit.likes
+      complete_outfit['dislikes'] = outfit.dislikes
+      complete_outfit['num_comments'] = outfit.num_comments
+      outfits << complete_outfit
     end
+    outfits
   end
 
   def format_ratings_hash(ratings, user_id)
@@ -84,6 +78,19 @@ module HashFormatterHelper
       end
       ratings << rates
     end
+  end
+
+  def format_comments_hash(comments)
+    comments_array = []
+    comments.each do
+    |comment|
+      comment_array = {}
+      comment_array["comment"] = comment.comment
+      comment_array["username"] = comment.user.username
+      comment_array["date"] = comment.created_at
+      comments_array << comment_array
+    end
+    comments_array
   end
 
 end

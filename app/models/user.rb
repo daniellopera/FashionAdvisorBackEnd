@@ -46,22 +46,29 @@ class User < ActiveRecord::Base
     result
   end
 
+
+
   # @param [String] search_text, the search input
-  def search_users(search_text)
+  # @param [User]
+  # @return [Array] All the related users to the search input
+  def search_users(search_text, current_user)
     users = User.where("username LIKE ?", "%#{search_text}%").select('id', 'username', 'email')
+    array = []
     users.map do |user|
       if following.include?(user)
         following = true
       else
         following = false
       end
-      {
-        id: user['id'],
-        username: user['username'],
-        email: user['email'],
-        following: following
-      }
+      u = {
+            id: user['id'],
+            username: user['username'],
+            email: user['email'],
+            following: following
+          }
+      array << u if user.id != current_user.id
     end
+    array
   end
 
 

@@ -26,9 +26,10 @@ class OutfitsController < ApplicationController
 
   #GET /user/outfits
   def bring_outfits_from_wardrobe
-    wardrobe_outfits = []
-    format_outfits_hash(wardrobe_outfits)
-    render json: {status: 0, data: {wardrobe_outfits: wardrobe_outfits}}
+    wardrobe_outfits = current_user.outfits.order(:created_at => 'ASC')
+    outfits = format_outfits_hash(wardrobe_outfits)
+    puts outfits
+    render json: {status: 0, data: {wardrobe_outfits: outfits}}
   end
 
 
@@ -36,13 +37,19 @@ class OutfitsController < ApplicationController
   def get_outfit_comments
     if params[:id]
       outfit = Outfit.find_by_id(params[:id])
-      comments = outfit.comments.select("comment", "user_id", "id")
-      render json: {status: 0, data: {outfit_comments: comments}}
+
+
+      comments = outfit.comments.select("comment", "user_id", "id", "created_at").order(:created_at => 'DESC')
+      comments_array = format_comments_hash(comments)
+      #comments.user_id = User.find_by_id(comments.user_id).username
+
+      render json: {status: 0, data: {outfit_comments: comments_array}}
     else
       render json:  {status: 1, data: nil}
     end
 
   end
+
 
   def get_outfit_by_name
     if params[:name]
@@ -58,9 +65,9 @@ class OutfitsController < ApplicationController
   def get_oufit_by_id
     if params[:id]
         outfit  = Outfit.find_by_id(params[:id])
-
+        outfit_products = format_products_in_outfit_hash(outfit.products)
         if outfit
-          render json: {status:0, data: outfit}, except: [:created_at,:updated_at]
+          render json: {status:0, data: {outfit: outfit, outfit_products: outfit_products}}, except: [:created_at,:updated_at]
         else
           render json: {status:1, data: nil}
         end
@@ -69,7 +76,6 @@ class OutfitsController < ApplicationController
     end
 
   end
-
 
   # POST /outfits/recommend
   # { "products" : [id1, id2, id3, ... , idn]}
