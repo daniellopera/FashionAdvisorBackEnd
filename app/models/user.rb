@@ -46,8 +46,6 @@ class User < ActiveRecord::Base
     result
   end
 
-
-
   # @param [String] search_text, the search input
   # @param [User]
   # @return [Array] All the related users to the search input

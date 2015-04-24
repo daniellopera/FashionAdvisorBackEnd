@@ -20,13 +20,14 @@ class Outfit < ActiveRecord::Base
 
   # This method will recommends the most relevant outfits that match the products id
   # list given.
-  def self.recommend_outfits(products_array)
-    related_outfits = search_outfits_by_products(products_array)
-    related_outfits_relevance = get_outfits_relevance(related_outfits)
-    ordered_relevance_array = order_outfits_by_relevance(related_outfits_relevance)
-    puts ordered_relevance_array.inspect
-    ordered_relevance_array
+  def self.recommend_outfits(products_array, tags_array)
+    related_outfits_by_products = search_outfits_by_products(products_array)
+    related_outfits_by_tags = search_outfits_by_tags(tags_array)
+    related_outfits_relevance = get_outfits_relevance(related_outfits_by_products, related_outfits_by_tags)
+    #ordered_relevance_array = order_outfits_by_relevance(related_outfits_relevance)
+    #ordered_relevance_array
   end
+
 
   # Searches the outfits that contain any of the products given in the array.
   def self.search_outfits_by_products(products_array)
@@ -37,18 +38,38 @@ class Outfit < ActiveRecord::Base
   outfits
   end
 
+  def self.search_outfits_by_tags(tags_array)
+    outfits = []
+    tags_array.each do |tag|
+      outfits << Tag.find_by_tag(tag).outfits
+    end
+
+    outfits
+  end
+
   # Get the most relevant outfits, this means that the outfit that is contained the most
   # in the related_outfits variable will get the highest relevance.
-  def self.get_outfits_relevance(related_outfits)
+  def self.get_outfits_relevance(related_outfits_by_products, related_outfits_by_tags)
     most_related_outfits = []
     outfits_relevance = {}
-    related_outfits.each do |outfits_array|
+    related_outfits_by_products.each do |outfits_array|
       outfits_array.each do |outfit|
         unless most_related_outfits.include? (outfit)
           most_related_outfits << outfit
           outfits_relevance[outfit.id] = 1
         else
           outfits_relevance[outfit.id] = outfits_relevance[outfit.id].to_i + 1
+        end
+      end
+    end
+
+    related_outfits_by_tags.each do |outfits_array|
+      outfits_array.each do |outfit|
+        unless most_related_outfits.include? (outfit)
+          most_related_outfits << outfit
+          outfits_relevance[outfit.id] = 1
+        else
+          outfits_relevance[outfit.id] = outfits_relevance[outfit.id].to_i + 5
         end
       end
     end
