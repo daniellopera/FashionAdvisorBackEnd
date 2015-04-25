@@ -62,7 +62,7 @@ class OutfitsController < ApplicationController
 
   end
 
-  
+
   def get_oufit_by_id
     if params[:id]
         outfit  = Outfit.find_by_id(params[:id])
@@ -82,7 +82,7 @@ class OutfitsController < ApplicationController
   # { "products" : [id1, id2, id3, ... , idn]}
   def recommend_outfits_by_products
     if params[:products]
-      outfits  = Outfit.recommend_outfits(params[:products])
+      outfits  = Outfit.recommend_outfits(params[:products], params[:tags])
       if outfits != nil
         render json: {status:0, data: outfits}, except: [:created_at,:updated_at]
       else
