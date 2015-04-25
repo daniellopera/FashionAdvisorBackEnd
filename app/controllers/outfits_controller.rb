@@ -62,6 +62,7 @@ class OutfitsController < ApplicationController
 
   end
 
+  
   def get_oufit_by_id
     if params[:id]
         outfit  = Outfit.find_by_id(params[:id])
