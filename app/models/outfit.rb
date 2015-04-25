@@ -41,7 +41,8 @@ class Outfit < ActiveRecord::Base
   def self.search_outfits_by_tags(tags_array)
     outfits = []
     tags_array.each do |tag|
-      outfits << Tag.find_by_tag(tag).outfits
+
+      outfits << Tag.find_by_tag(tag).outfits if Tag.find_by_tag(tag) != nil
     end
 
     outfits
