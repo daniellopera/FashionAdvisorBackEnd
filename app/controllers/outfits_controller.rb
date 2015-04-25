@@ -79,9 +79,9 @@ class OutfitsController < ApplicationController
   end
 
   # POST /outfits/recommend
-  # { "products" : [id1, id2, id3, ... , idn]}
+  # { "products" : [id1, id2, id3, ... , idn], "tags" : ["name"]}
   def recommend_outfits_by_products
-    if params[:products]
+    if params[:products] || params[:tags]
       outfits  = Outfit.recommend_outfits(params[:products], params[:tags])
       if outfits != nil
         render json: {status:0, data: outfits}, except: [:created_at,:updated_at]
