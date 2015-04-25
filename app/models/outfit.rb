@@ -21,8 +21,19 @@ class Outfit < ActiveRecord::Base
   # This method will recommends the most relevant outfits that match the products id
   # list given.
   def self.recommend_outfits(products_array, tags_array)
-    related_outfits_by_products = search_outfits_by_products(products_array)
-    related_outfits_by_tags = search_outfits_by_tags(tags_array)
+    
+    if products_array != nil
+      related_outfits_by_products = search_outfits_by_products(products_array) if products_array != nil
+    else
+      related_outfits_by_products = []
+    end
+
+    if tags_array != nil
+      related_outfits_by_tags = search_outfits_by_tags(tags_array)
+    else
+      related_outfits_by_tags = []
+    end
+
     related_outfits_relevance = get_outfits_relevance(related_outfits_by_products, related_outfits_by_tags)
     ordered_relevance_array = order_outfits_by_relevance(related_outfits_relevance)
     ordered_relevance_array
