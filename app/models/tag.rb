@@ -2,7 +2,7 @@ class Tag < ActiveRecord::Base
   has_and_belongs_to_many :outfits
   validates_uniqueness_of :tag
 
-  def create_tags(tags, outfit_id)
+  def self.create_tags(tags, outfit_id)
     outfit = Outfit.find(outfit_id)
     tags.each do |tag_user|
       tag = Tag.new
