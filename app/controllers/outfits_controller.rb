@@ -13,8 +13,7 @@ class OutfitsController < ApplicationController
       outfit.description = params[:about]
       outfit.user_id = current_user.id
       if outfit.save
-        outfit.add_products_to_outfit(params[:products])
-
+        outfit.finish_creation(params[:products])
         render json: {status: 0, data: {outfitid: outfit.id, outfit_products: outfit.products}}
       else
         render json: {status: 1, data: nil}

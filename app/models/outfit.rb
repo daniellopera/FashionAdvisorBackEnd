@@ -5,7 +5,6 @@ class Outfit < ActiveRecord::Base
   has_many :comments
   has_many :activities
   has_and_belongs_to_many :tags
-  after_save :create_activity
   attr_accessor :num_comments
 
   def add_products_to_outfit(products_array)
@@ -17,6 +16,11 @@ class Outfit < ActiveRecord::Base
 
   def search_outfits_by_name(outfit_name)
     outfits = Outfit.where("name LIKE ?", "%#{outfit_name}%")
+  end
+
+  def finish_creation(products_array)
+    add_products_to_outfit(products_array)
+    create_activity
   end
 
   # This method will recommends the most relevant outfits that match the products id
