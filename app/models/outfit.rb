@@ -3,8 +3,9 @@ class Outfit < ActiveRecord::Base
   belongs_to :user
   has_many :ratings
   has_many :comments
+  has_many :activities
   has_and_belongs_to_many :tags
-
+  after_save :create_activity
   attr_accessor :num_comments
 
   def add_products_to_outfit(products_array)
@@ -106,6 +107,14 @@ class Outfit < ActiveRecord::Base
 
   def attributes
     super.merge('num_comments' => self.num_comments)
+  end
+
+  def create_activity
+    activity = Activity.new
+    activity.user_id = self.user_id
+    activity.outfit_id = self.id
+    activity.type = "created"
+    activity.save
   end
 
 end

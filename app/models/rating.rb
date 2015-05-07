@@ -1,7 +1,7 @@
 class Rating < ActiveRecord::Base
   belongs_to :outfit
   belongs_to :user
-
+  after_save :create_activity
   validates :outfit_id,
             presence: true
   validates_uniqueness_of :outfit_id, :scope => :user_id
@@ -39,12 +39,14 @@ class Rating < ActiveRecord::Base
     old_rating = rating.rating
     new_rating = new_rating.to_i
     #save the new rating
-    rating.rating = new_rating
-    rating.save
     if new_rating == 1 && old_rating == 0
+      rating.rating = new_rating
+      rating.save
       outfit.dislikes += -1
       outfit.likes += 1
     elsif new_rating == 0 && old_rating == 1
+      rating.rating = new_rating
+      rating.save
       outfit.likes += -1
       outfit.dislikes += 1
     end
@@ -56,6 +58,18 @@ class Rating < ActiveRecord::Base
       answer['status'] = 1
     end
     answer
+  end
+
+  def create_activity
+    activity = Activity.new
+    activity.user_id = self.user_id
+    activity.outfit_id = self.outfit_id
+    if self.rating == 1
+      activity.type = "liked"
+    elsif self.rating == 0
+      activity.type = "disliked"
+    end
+    activity.save
   end
 
 end
