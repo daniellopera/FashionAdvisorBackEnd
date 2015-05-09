@@ -65,9 +65,9 @@ class Rating < ActiveRecord::Base
     activity.user_id = self.user_id
     activity.outfit_id = self.outfit_id
     if self.rating == 1
-      activity.type = "liked"
+      activity.feed_type = "liked"
     elsif self.rating == 0
-      activity.type = "disliked"
+      activity.feed_type = "disliked"
     end
     activity.save
   end

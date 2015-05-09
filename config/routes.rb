@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get 'user/followers'  => 'users#followers_users'
   get 'user/ratings'    => 'ratings#get_ratings_from_a_user'
   get 'user/products' => 'users#get_products_from_wardrobe'
+  get 'user/feed'     => 'activities#following_activities'
   post 'users/profile'  => 'users#view_profile'
   post 'users/follow'   => 'users#follow_a_user'
   post 'user/products'=> 'users#add_product_to_wardrobe'

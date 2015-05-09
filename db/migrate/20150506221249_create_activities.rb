@@ -3,7 +3,7 @@ class CreateActivities < ActiveRecord::Migration
     create_table :activities do |t|
       t.integer :user_id
       t.integer :outfit_id
-      t.string :type
+      t.string :feed_type
       t.timestamps null: false
     end
   end

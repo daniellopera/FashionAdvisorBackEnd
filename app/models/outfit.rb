@@ -117,7 +117,7 @@ class Outfit < ActiveRecord::Base
     activity = Activity.new
     activity.user_id = self.user_id
     activity.outfit_id = self.id
-    activity.type = "created"
+    activity.feed_type = "created"
     activity.save
   end
 
