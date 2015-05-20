@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150506221249) do
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "outfit_id",  limit: 4
-    t.string   "type",       limit: 255
+    t.string   "feed_type",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -72,16 +72,18 @@ ActiveRecord::Schema.define(version: 20150506221249) do
   end
 
   create_table "products_users", id: false, force: :cascade do |t|
-    t.integer "product_id", limit: 4
-    t.integer "user_id",    limit: 4
+    t.integer  "product_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "products_users", ["product_id", "user_id"], name: "index_products_users_on_product_id_and_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
+    t.integer  "rating",     limit: 1
     t.integer  "user_id",    limit: 4
     t.integer  "outfit_id",  limit: 4
-    t.boolean  "rating",     limit: 1
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
