@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150520155841) do
-=======
-ActiveRecord::Schema.define(version: 20150520163450) do
->>>>>>> 9bfeb7135434b869c84e67403af702165d294ec5
+ActiveRecord::Schema.define(version: 20150520185325) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -77,6 +73,13 @@ ActiveRecord::Schema.define(version: 20150520163450) do
   end
 
   add_index "outfits_tags", ["tag_id", "outfit_id"], name: "index_outfits_tags_on_tag_id_and_outfit_id", using: :btree
+
+  create_table "outfits_users", force: :cascade do |t|
+    t.integer "outfit_id", limit: 4
+    t.integer "user_id",   limit: 4
+  end
+
+  add_index "outfits_users", ["user_id", "outfit_id"], name: "index_outfits_users_on_user_id_and_outfit_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.datetime "created_at", null: false

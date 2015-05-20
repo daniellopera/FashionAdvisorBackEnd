@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
                           association_foreign_key: "following_id"
   has_and_belongs_to_many :followers, :class_name => "User", join_table: "followers_following", foreign_key:  "following_id",
                           association_foreign_key: "user_id"
-  has_many :outfits
+  has_and_belongs_to_many :outfits, :class_name => "Outfit", join_table: "outfits_users", foreign_key:  "user_id",
+                          association_foreign_key: "outfit_id"
   has_many :comments
   has_many :ratings
   has_many :activities
