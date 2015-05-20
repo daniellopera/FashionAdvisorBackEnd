@@ -60,12 +60,16 @@ class User < ActiveRecord::Base
       else
         following = false
       end
+      user = User.find(user['id'])
+
       u = {
             id: user['id'],
             username: user['username'],
             email: user['email'],
             image: user['image'],
-            following: following
+            following_number:user.following.count,
+            followers_numer:user.followers.count,
+            is_following: following
           }
       array << u if user.id != current_user.id
     end
