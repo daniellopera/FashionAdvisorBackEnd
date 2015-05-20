@@ -5,7 +5,7 @@ class OutfitsController < ApplicationController
 
 
   def create
-    unless params[:fullname].blank? && params[:products] == nil
+    unless params[:fullname].blank? && params[:products] == nil && params[:tags] == nil
       outfit = Outfit.new
       outfit.name = params[:fullname]
       outfit.likes = 0
@@ -14,6 +14,7 @@ class OutfitsController < ApplicationController
       outfit.user_id = current_user.id
 
       if outfit.save
+        create_tags(params[:tags], outfit.id)
         outfit.finish_creation(params[:products])
         current_user.outfits << outfit
         render json: {status: 0, data: {outfitid: outfit.id, outfit_products: outfit.products}}
@@ -96,6 +97,15 @@ class OutfitsController < ApplicationController
 
   end
 
+
+  private
+  def create_tags(tags, id)
+    unless tags ==  nil
+      tags = tags
+      outfit_id = id
+      Outfit.create_tags(tags,outfit_id)
+    end
+  end
 
 
 end

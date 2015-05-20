@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   root 'products#search'
 
   get 'search/' => 'products#search'
+  get 'search/:id' => 'products#search_product_by_id'
 
   get 'colors/' => 'products#list_colors'
 

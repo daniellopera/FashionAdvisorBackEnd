@@ -121,4 +121,25 @@ class Outfit < ActiveRecord::Base
     activity.save
   end
 
+  def self.create_tags(tags, outfit_id)
+    outfit = Outfit.find(outfit_id)
+    tags = tags.split
+    tags.each do |tag_user|
+      tag = Tag.new
+      tag.tag = tag_user
+      tag.tag_counter = 0
+      if tag.save
+        outfit.tags << tag
+      elsif(Tag.find_by_tag(tag.tag) != nil)
+        old_tag = Tag.find_by_tag(tag.tag)
+        if outfit.tags.find_by_id(old_tag.id) == nil
+          outfit.tags << old_tag
+        end
+        old_tag.tag_counter = old_tag.tag_counter + 1
+        old_tag.save
+      end
+
+    end
+  end
+
 end

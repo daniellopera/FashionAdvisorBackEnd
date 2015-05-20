@@ -22,6 +22,12 @@ class ProductsController < ApplicationController
     render json: { status: 0, data: {products: products} }
   end
 
+  #GET /search/:id
+  def search_product_by_id
+    product = search_by_id(params[:id])
+    render json: {status: 0, data:product}
+  end
+
   # GET '/colors/' to list all the colors.
   # This is planned to be moved to a new "Search" controller.
   def list_colors
