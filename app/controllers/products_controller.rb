@@ -25,6 +25,12 @@ class ProductsController < ApplicationController
   #GET /search/:id
   def search_product_by_id
     product = search_by_id(params[:id])
+    if current_user.has_product_in_wardrobe?(product['id'].to_i)
+      product['in_wardrobe'] = true
+    else
+      product['in_wardrobe'] = false
+    end
+
     render json: {status: 0, data:product}
   end
 
