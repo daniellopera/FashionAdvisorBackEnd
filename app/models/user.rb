@@ -26,12 +26,12 @@ class User < ActiveRecord::Base
 
   # Get all the users that the current user is following
   def get_following
-    following.select('id', 'email', 'username')
+    following.select('id', 'email', 'username', 'image')
   end
 
   # Get all the users that follow the current user
   def get_followers
-    followers.select('id', 'email', 'username')
+    followers.select('id', 'email', 'username', 'image')
   end
 
   # Adds a user to the following collection
@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   # @param [User]
   # @return [Array] All the related users to the search input
   def search_users(search_text, current_user)
-    users = User.where("username LIKE ?", "%#{search_text}%").select('id', 'username', 'email')
+    users = User.where("username LIKE ?", "%#{search_text}%").select('id', 'username', 'email', 'image')
     array = []
     users.map do |user|
       if following.include?(user)
@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
             id: user['id'],
             username: user['username'],
             email: user['email'],
+            image: user['image'],
             following: following
           }
       array << u if user.id != current_user.id
