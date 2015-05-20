@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
       username: following.username,
       id: following.id,
       image: following.image,
+      email: following.email,
       followers_number: user.followers.count,
       following_number: user.following.count
       }
@@ -51,6 +52,7 @@ class User < ActiveRecord::Base
           username: follower.username,
           id: follower.id,
           image: follower.image,
+          email: follower.email,
           followers_number: user.followers.count,
           following_number: user.following.count
       }
