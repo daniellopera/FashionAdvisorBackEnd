@@ -82,9 +82,9 @@ class UsersController < ApplicationController
   # POST 'user/outfits/add'
   # Adds an outfit to the wardrobe
   def add_outfit_to_wardrobe
-    puts "PENENENENE #{current_user}"
+
     if current_user.outfits.find_by_id(params[:outfit_id]) == nil
-      puts "PENE"
+
       current_user.outfits << Outfit.find(params[:outfit_id])
       render json: {status: 0, data: nil}
     else
