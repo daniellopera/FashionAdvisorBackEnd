@@ -41,9 +41,7 @@ class UsersController < ApplicationController
     user = User.find_by_id(params[:id])
     if user
       if user.outfits.any?
-        render json: {status: 0, data: {outfits: user.outfits,
-                                        following: user.following.count,
-                                        followers: user.followers.count}}
+        render json: {status: 0, data: user.outfits}
       else
         render json: {status: 0, data:nil}
       end
