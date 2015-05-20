@@ -26,7 +26,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
        render json: {
                   status: 0,
                   data:{ auth_token: current_user.authentication_token,
-                         email: resource.email}
+                         email: resource.email,
+                         username:current_user.username,
+                         clothing: 0,
+                         outfits: 0,
+                         following: 0,
+                         followers: 0
+                  }
               }
      else
        # Couldn't register the user, something happened.

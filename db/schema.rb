@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506221249) do
+ActiveRecord::Schema.define(version: 20150520155841) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "outfit_id",  limit: 4
-    t.string   "type",       limit: 255
+    t.string   "feed_type",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 20150506221249) do
     t.integer  "outfit_id",  limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "fashion_updates", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "image_url",   limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "followers_following", id: false, force: :cascade do |t|
