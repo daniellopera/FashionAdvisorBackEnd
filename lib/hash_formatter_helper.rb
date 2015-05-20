@@ -108,4 +108,19 @@ module HashFormatterHelper
     activities_array
   end
 
+  def format_outfit_hash(outfit)
+      complete_outfit = Hash.new
+      user = User.find(outfit.user_id)
+      complete_outfit['id'] = outfit.id
+      complete_outfit['name'] = outfit.name
+      complete_outfit['description'] = outfit.description
+      complete_outfit['products'] = outfit.products.select("id")
+      complete_outfit['likes'] = outfit.likes
+      complete_outfit['dislikes'] = outfit.dislikes
+      complete_outfit['num_comments'] = outfit.num_comments
+      complete_outfit['username'] = user.username
+      complete_outfit['tags'] = outfit.tags
+      complete_outfit
+  end
+
 end

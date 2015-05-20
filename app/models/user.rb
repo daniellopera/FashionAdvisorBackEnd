@@ -27,12 +27,36 @@ class User < ActiveRecord::Base
 
   # Get all the users that the current user is following
   def get_following
-    following.select('id', 'email', 'username', 'image')
+    followings_array = []
+    following.each do |following|
+      user = User.find(following.id)
+      following_complete = {
+      username: following.username,
+      id: following.id,
+      image: following.image,
+      followers_number: user.followers.count,
+      following_number: user.following.count
+      }
+      followings_array << following_complete
+    end
+    followings_array
   end
 
   # Get all the users that follow the current user
   def get_followers
-    followers.select('id', 'email', 'username', 'image')
+    followers_array = []
+    followers.each do |follower|
+      user = User.find(follower.id)
+      follower_complete = {
+          username: follower.username,
+          id: follower.id,
+          image: follower.image,
+          followers_number: user.followers.count,
+          following_number: user.following.count
+      }
+      followers_array << follower_complete
+    end
+    followers_array
   end
 
   # Adds a user to the following collection
@@ -68,7 +92,7 @@ class User < ActiveRecord::Base
             email: user['email'],
             image: user['image'],
             following_number:user.following.count,
-            followers_numer:user.followers.count,
+            followers_number:user.followers.count,
             is_following: following
           }
       array << u if user.id != current_user.id

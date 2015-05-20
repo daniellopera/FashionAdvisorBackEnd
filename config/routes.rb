@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   post 'outfit/tag'   => 'tags#create_tags'
   get  'fashion/updates' =>  'fashion_updates#bring_fashion_updates'
 
-  get 'outfits/:id' => 'outfits#get_oufit_by_id'
+  get 'outfits/:id' => 'outfits#get_outfit_by_id'
   post 'outfits/search' => 'outfits#get_outfit_by_name'
   post 'outfits/recommend' => 'outfits#recommend_outfits_by_products'
 end

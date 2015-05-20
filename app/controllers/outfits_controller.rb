@@ -64,12 +64,13 @@ class OutfitsController < ApplicationController
   end
 
 
-  def get_oufit_by_id
+  def get_outfit_by_id
     if params[:id]
         outfit  = Outfit.find_by_id(params[:id])
+        formatted_outfit = format_outfit_hash(outfit)
         outfit_products = format_products_in_outfit_hash(outfit.products)
         if outfit
-          render json: {status:0, data: {outfit: outfit, outfit_products: outfit_products}}, except: [:created_at,:updated_at]
+          render json: {status:0, data: {outfit: formatted_outfit, outfit_products: outfit_products}}, except: [:created_at,:updated_at, :tag_counter]
         else
           render json: {status:1, data: nil}
         end
