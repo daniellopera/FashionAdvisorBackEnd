@@ -10,7 +10,7 @@ class ActivitiesController < ApplicationController
     else
       activities = Activity.bring_following_activities(following_list)
       formatted_activities = format_activities_hash(activities)
-      render json: {status: 0, data: formatted_activities.take(10)}
+      render json: {status: 0, data: formatted_activities.take(20)}
     end
 
 
