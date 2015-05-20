@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   post 'user/products'=> 'users#add_product_to_wardrobe'
   post 'user/outfits' => 'outfits#create'
   post 'outfit/tag'   => 'tags#create_tags'
+  get  'fashion/updates' =>  'fashion_updates#bring_fashion_updates'
 
   get 'outfits/:id' => 'outfits#get_oufit_by_id'
   post 'outfits/search' => 'outfits#get_outfit_by_name'

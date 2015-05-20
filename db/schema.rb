@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20150520155841) do
+=======
 ActiveRecord::Schema.define(version: 20150520163450) do
+>>>>>>> 9bfeb7135434b869c84e67403af702165d294ec5
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -33,6 +37,14 @@ ActiveRecord::Schema.define(version: 20150520163450) do
     t.integer  "outfit_id",  limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "fashion_updates", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "image_url",   limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "followers_following", id: false, force: :cascade do |t|

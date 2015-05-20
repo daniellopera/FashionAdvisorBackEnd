@@ -19,7 +19,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
    # POST /resource
    def create
      build_resource(sign_up_params)
-     puts "pera es un puto gay #{sign_up_params}"
      resource_saved = resource.save
 
      yield resource if block_given?
@@ -28,7 +27,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
        render json: {
                   status: 0,
                   data:{ auth_token: current_user.authentication_token,
-                         email: resource.email}
+                         email: resource.email,
+                         username:current_user.username,
+                         clothing: 0,
+                         outfits: 0,
+                         following: 0,
+                         followers: 0
+                  }
               }
      else
        # Couldn't register the user, something happened.
