@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
+  before_filter :configure_permitted_parameters
 
   # This will be deleted in the final project, helps us to render an HTML layout to easily register in
   # the application.
@@ -20,6 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def create
      build_resource(sign_up_params)
      resource_saved = resource.save
+
      yield resource if block_given?
      if resource_saved
        sign_up(resource_name, resource)
@@ -48,5 +49,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
      end
    end
 
+
+
+   protected
+   def configure_permitted_parameters
+     devise_parameter_sanitizer.for(:sign_up).push(:username, :email, :password)
+   end
 
 end

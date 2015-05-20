@@ -11,6 +11,22 @@ class Users::SessionsController < Devise::SessionsController
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
+    render json: {status: 0, data:{auth_token: current_user.authentication_token,
+                                   email: resource.email,
+                                   username: current_user.username,
+                                   followers:current_user.followers.count,
+                                   outfits: current_user.outfits.count,
+                                   following: current_user.following.count,
+                                   clothing: current_user.products.count,
+                                   image: current_user.image
+                  }}
+  end
+
+
+  #POST /users/guest
+  def create_guest
+    resource = User.find_by_email("guest")
+    sign_in(resource_name, resource)
     render json: {status: 0, data:{auth_token: current_user.authentication_token, email: resource.email}}
   end
 

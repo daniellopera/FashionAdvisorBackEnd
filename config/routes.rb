@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
+  devise_scope :user do
+    post 'users/guest', :to => 'users/sessions#create_guest'
+  end
 
   # Tells the router to use the controllers located in /controllers/users
   # This routes are specifically for the users registration, authentication and authorization
   # done by the devise gem and the simple toke authentication gems.
   devise_for :users, controllers: {
                                     sessions: 'users/sessions',
-                                    registrations: 'users/registrations'
+                                    registrations: 'users/registrations',
+
                                   }
 
 

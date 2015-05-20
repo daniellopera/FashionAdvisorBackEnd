@@ -97,9 +97,10 @@ module HashFormatterHelper
     activities_array = []
     activities.each do |activity|
       feed = Hash.new
-      feed['username'] = User.find(activity.user_id).username
+      feed['username'] = User.find_by_id(activity.user_id).username
+      feed['image'] = User.find_by_id(activity.user_id).image
       feed['outfit_id'] = activity.outfit_id
-      feed['outfit_name'] = Outfit.find(activity.outfit_id).name
+      feed['outfit_name'] = Outfit.find_by_id(activity.outfit_id).name
       feed['feed_type'] = activity.feed_type
       feed['date'] = activity.created_at
       activities_array << feed
