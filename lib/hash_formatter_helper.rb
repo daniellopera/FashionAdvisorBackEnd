@@ -60,6 +60,7 @@ module HashFormatterHelper
       complete_outfit['likes'] = outfit.likes
       complete_outfit['dislikes'] = outfit.dislikes
       complete_outfit['num_comments'] = outfit.num_comments
+      complete_outfit['tags'] = outfit.tags
       outfits << complete_outfit
     end
     outfits

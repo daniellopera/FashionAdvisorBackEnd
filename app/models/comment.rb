@@ -16,7 +16,7 @@ class Comment < ActiveRecord::Base
     activity = Activity.new
     activity.user_id = self.user_id
     activity.outfit_id = self.outfit_id
-    activity.feed_type = "commented"
+    activity.feed_type = "commented on"
     activity.save
   end
 
