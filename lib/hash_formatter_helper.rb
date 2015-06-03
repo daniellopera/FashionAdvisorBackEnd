@@ -61,6 +61,7 @@ module HashFormatterHelper
       complete_outfit['dislikes'] = outfit.dislikes
       complete_outfit['num_comments'] = outfit.num_comments
       complete_outfit['tags'] = outfit.tags
+      complete_outfit['username'] = User.find_by_id(outfit.user_id).username
       outfits << complete_outfit
     end
     outfits
